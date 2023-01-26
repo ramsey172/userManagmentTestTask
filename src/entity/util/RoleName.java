@@ -6,6 +6,4 @@ public enum RoleName {
     ADMIN,
     PROVIDER,
     SUPER_ADMIN
-
-
 }

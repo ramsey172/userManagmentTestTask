@@ -5,6 +5,14 @@ public class Role {
     private final RoleName name;
     private RoleLevel level;
 
+    public enum RoleLevel {
+        LEVEL_1,
+        LEVEL_2,
+        LEVEL_3
+    }
+
+
+
     public Role(RoleName name) {
         this.name = name;
         if (name.equals(RoleName.USER) || name.equals(RoleName.CUSTOMER)) {
