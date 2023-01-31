@@ -1,14 +1,12 @@
 package validators;
 
-import entity.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractUserValidator {
+public abstract class AbstractValidator<T> {
     protected List<String> errorMessages = new ArrayList<>();
 
-    public abstract boolean isValid(User user);
+    public abstract boolean isValid(T object);
 
     public List<String> popErrorMessages() {
         List<String> errors = new ArrayList<>(errorMessages);

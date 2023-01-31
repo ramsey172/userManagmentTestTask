@@ -2,14 +2,17 @@ package validators;
 
 import entity.User;
 import entity.util.Role;
-import entity.util.RoleName;
 
 import java.util.List;
 
-public class UserValidator extends AbstractUserValidator {
+public class UserValidator extends AbstractValidator<User> {
 
     private final int MIN_PHONES_COUNT = 1;
     private final int MAX_PHONES_COUNT = 3;
+    private final String FIRST_NAME_REGEX = "^[A-Za-z][A-Za-z0-9_]{2,16}$";
+    private final String SECOND_NAME_REGEX = "^[A-Za-z][A-Za-z0-9_]{2,16}$";
+    private final String EMAIL_REGEX = "^[\\w-]{2,4}@([\\w-]{2,4}\\.)+[\\w-]{2,4}$";
+    private final String PHONE_REGEX = "^375(\\d){9}$";
 
     public boolean isValid(User user) {
         return isFirstNameValid(user.getFirstName()) &&
@@ -20,7 +23,7 @@ public class UserValidator extends AbstractUserValidator {
     }
 
     private boolean isFirstNameValid(String firstName) {
-        if (!firstName.matches("^[A-Za-z][A-Za-z0-9_]{2,16}$")) {
+        if (!firstName.matches(FIRST_NAME_REGEX)) {
             errorMessages.add("Incorrect firstname");
             return false;
         }
@@ -28,7 +31,7 @@ public class UserValidator extends AbstractUserValidator {
     }
 
     private boolean isSecondNameValid(String secondName) {
-        if (!secondName.matches("^[A-Za-z][A-Za-z0-9_]{2,16}$")) {
+        if (!secondName.matches(SECOND_NAME_REGEX)) {
             errorMessages.add("Incorrect secondname");
             return false;
         }
@@ -36,7 +39,7 @@ public class UserValidator extends AbstractUserValidator {
     }
 
     private boolean isEmailValid(String email) {
-        if (!email.matches("^[\\w-]{2,4}@([\\w-]{2,4}\\.)+[\\w-]{2,4}$")) {
+        if (!email.matches(EMAIL_REGEX)) {
             errorMessages.add("Incorrect email");
             return false;
         }
@@ -48,7 +51,7 @@ public class UserValidator extends AbstractUserValidator {
             errorMessages.add("Incorrect phones count");
             return false;
         }
-        if (!phones.stream().allMatch(phone -> phone.matches("^375(\\d){9}$"))) {
+        if (!phones.stream().allMatch(phone -> phone.matches(PHONE_REGEX))) {
             errorMessages.add("Incorrect phone(s)");
             return false;
         }
@@ -62,7 +65,7 @@ public class UserValidator extends AbstractUserValidator {
         }
 
         if (roles.size() == 2) {
-            if (roles.stream().anyMatch(role -> role.getName().equals(RoleName.SUPER_ADMIN))) {
+            if (roles.stream().anyMatch(role -> role.getName().equals(Role.RoleName.SUPER_ADMIN))) {
                 errorMessages.add("User with role SUPER_ADMIN must have only 1 role");
                 return false;
             }

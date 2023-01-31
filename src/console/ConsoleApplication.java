@@ -2,7 +2,7 @@ package console;
 
 import entity.User;
 import entity.util.Role;
-import entity.util.RoleName;
+//import entity.util.RoleName;
 import services.UserManagerService;
 import validators.UserValidator;
 
@@ -94,17 +94,17 @@ public class ConsoleApplication {
         }
         boolean flagRolesContinue = true;
         int tmpRoleIntAnswer;
-        RoleName tmpRoleName;
+        Role.RoleName tmpRoleName;
         Role tmpRole;
         String tmpRoleContinueAnswer;
         List<Role> roles = new ArrayList<>();
         write("Choose user role");
-        for (int i = 0; i < RoleName.values().length; i++) {
-            write((i + 1) + ". " + RoleName.values()[i]);
+        for (int i = 0; i < Role.RoleName.values().length; i++) {
+            write((i + 1) + ". " + Role.RoleName.values()[i]);
         }
         while (flagRolesContinue) {
             tmpRoleIntAnswer = readInt();
-            tmpRoleName = RoleName.values()[--tmpRoleIntAnswer];
+            tmpRoleName = Role.RoleName.values()[--tmpRoleIntAnswer];
             tmpRole = new Role(tmpRoleName);
             roles.add(tmpRole);
             write("Want to add another role? (y/n)");

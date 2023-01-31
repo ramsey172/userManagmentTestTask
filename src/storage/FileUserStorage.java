@@ -2,7 +2,6 @@ package storage;
 
 import entity.User;
 import entity.util.Role;
-import entity.util.RoleName;
 
 import java.io.*;
 import java.util.*;
@@ -128,7 +127,7 @@ public class FileUserStorage implements UserStorage {
         ArrayList<Role> roles = new ArrayList<>();
         ArrayList<String> phones = new ArrayList<>(Arrays.asList(arrPhones));
         for (String r : arrRoles) {
-            Role role = new Role(RoleName.valueOf(r));
+            Role role = new Role(Role.RoleName.valueOf(r));
             roles.add(role);
         }
         return new User(Long.parseLong(arrUserParts[0]), arrUserParts[1], arrUserParts[2], arrUserParts[3], phones, roles);

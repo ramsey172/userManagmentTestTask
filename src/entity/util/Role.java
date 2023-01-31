@@ -11,6 +11,14 @@ public class Role {
         LEVEL_3
     }
 
+    public enum RoleName {
+        USER,
+        CUSTOMER,
+        ADMIN,
+        PROVIDER,
+        SUPER_ADMIN
+    }
+
 
 
     public Role(RoleName name) {
